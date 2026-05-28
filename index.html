@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh From the Backyard | Our Little Flock</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #F7F0E3;
+            --cream-dark: #EDE4D0;
+            --sage: #4A6741;
+            --sage-light: #6B8F62;
+            --sage-dark: #2F4228;
+            --terracotta: #B5522A;
+            --brown: #6B3F1E;
+            --gold: #C8963E;
+            --text-dark: #2C1810;
+            --text-mid: #5C3D2A;
+            --text-muted: #7A6050;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--cream);
+            color: var(--text-dark);
+            font-family: 'Lora', Georgia, serif;
+            line-height: 1.7;
+        }
+        nav {
+            background: var(--sage-dark);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--cream);
+            letter-spacing: 0.02em;
+        }
+        nav ul { list-style: none; display: flex; gap: 2rem; }
+        nav ul li a {
+            color: #B8C9A8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        nav ul li a:hover { color: var(--gold); }
+
+        /* Hero */
+        .hero {
+            background: var(--sage-dark);
+            color: var(--cream);
+            text-align: center;
+            padding: 7rem 2rem 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0; right: 0;
+            height: 60px;
+            background: var(--cream);
+            clip-path: ellipse(60% 100% at 50% 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+            animation: fadeUp 0.9s ease forwards;
+        }
+        .hero-eyebrow {
+            font-size: 0.82rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            font-weight: 700;
+            line-height: 1.08;
+            margin-bottom: 1.5rem;
+            color: var(--cream);
+        }
+        .hero h1 em { font-style: italic; color: #D4C49A; }
+        .hero-sub {
+            font-size: 1.08rem;
+            color: #A8BF98;
+            max-width: 480px;
+            margin: 0 auto 2.5rem;
+            font-style: italic;
+        }
+        .hero-rule { width: 50px; height: 2px; background: var(--gold); margin: 0 auto; }
+
+        /* Layout */
+        .container { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+        .section-label {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            margin-bottom: 0.6rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 600;
+            color: var(--sage-dark);
+            margin-bottom: 0.9rem;
+            line-height: 1.2;
+        }
+        .section-intro {
+            color: var(--text-muted);
+            max-width: 580px;
+            margin-bottom: 3rem;
+            font-size: 1.03rem;
+        }
+
+        /* Flock Grid */
+        .flock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.75rem;
+        }
+        .hen-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 2px 16px rgba(44,24,16,0.07), 0 1px 4px rgba(44,24,16,0.05);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
+        .hen-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 36px rgba(44,24,16,0.13);
+        }
+        .hen-top {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .hen-top.mira    { background: linear-gradient(145deg, #9B6A48 0%, #6B3F1E 100%); }
+        .hen-top.dottie  { background: linear-gradient(145deg, #72976A 0%, #4A6741 100%); }
+        .hen-top.luna    { background: linear-gradient(145deg, #7AAFC4 0%, #4A7A91 100%); }
+        .hen-top.snow    { background: linear-gradient(145deg, #60AAB4 0%, #3A7A84 100%); }
+        .hen-icon { font-size: 3.6rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25)); }
+        .hen-badge {
+            position: absolute;
+            top: 11px; right: 11px;
+            background: rgba(255,255,255,0.18);
+            color: rgba(255,255,255,0.95);
+            font-size: 0.67rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 3px 9px;
+            border-radius: 20px;
+            backdrop-filter: blur(6px);
+            font-family: 'Lora', serif;
+        }
+        .hen-body { padding: 1.4rem 1.5rem 1.5rem; }
+        .hen-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.15rem;
+        }
+        .hen-breed {
+            font-size: 0.77rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 0.9rem;
+            letter-spacing: 0.03em;
+        }
+        .hen-personality {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.73rem;
+            background: var(--cream);
+            color: var(--sage-dark);
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+        .hen-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.72; }
+        .egg-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 1rem;
+            padding-top: 0.9rem;
+            border-top: 1px solid var(--cream-dark);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        .egg-pip {
+            width: 17px;
+            height: 21px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            flex-shrink: 0;
+        }
+
+        /* Eggs */
+        .eggs-band { background: var(--sage-dark); }
+        .eggs-band .section-label { color: var(--gold); }
+        .eggs-band .section-title { color: var(--cream); }
+        .eggs-band .section-intro { color: #9EBA8E; }
+        .eggs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+        }
+        .egg-card {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .egg-card:hover { background: rgba(255,255,255,0.12); }
+        .egg-shape {
+            width: 52px;
+            height: 64px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            margin: 0 auto 1.1rem;
+        }
+        .egg-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--cream);
+            margin-bottom: 0.4rem;
+        }
+        .egg-note { font-size: 0.83rem; color: #9EBA8E; font-style: italic; line-height: 1.55; }
+
+        /* Story */
+        .story-band { background: var(--cream-dark); }
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .story-pull {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-style: italic;
+            color: var(--sage-dark);
+            margin-bottom: 1rem;
+            line-height: 1.35;
+        }
+        .story-text p {
+            font-size: 0.95rem;
+            color: var(--text-mid);
+            line-height: 1.85;
+            margin-bottom: 1.2rem;
+        }
+        .sweet-pea {
+            background: white;
+            border-radius: 16px;
+            padding: 1.6rem;
+            border-left: 4px solid var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .sweet-pea h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 0.7rem;
+        }
+        .sweet-pea p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; font-style: italic; }
+        .ranches {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .ranch-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.1rem 1.2rem;
+            border: 1px solid var(--cream-dark);
+        }
+        .ranch-card h5 {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.97rem;
+            color: var(--sage-dark);
+            margin-bottom: 0.35rem;
+        }
+        .ranch-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        footer p { font-size: 0.83rem; color: #6A5048; margin-top: 0.4rem; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 700px) {
+            nav ul { display: none; }
+            .story-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .ranches { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <span class="nav-brand">🌿 Fresh From the Backyard</span>
+    <ul>
+        <li><a href="#flock">The Flock</a></li>
+        <li><a href="#eggs">The Eggs</a></li>
+        <li><a href="#story">Our Story</a></li>
+    </ul>
+</nav>
+
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-eyebrow">Renton, Washington</div>
+        <h1>Fresh Eggs,<br><em>Happy Hens</em></h1>
+        <p class="hero-sub">Four remarkable ladies, one backyard flock, and more eggs than we know what to do with.</p>
+        <div class="hero-rule"></div>
+    </div>
+</div>
+
+<div id="flock">
+    <div class="container">
+        <div class="section-label">The Ladies</div>
+        <h2 class="section-title">Meet the Flock</h2>
+        <p class="section-intro">Four hens, four personalities, four beautiful egg colors. Each one a character in her own right.</p>
+
+        <div class="flock-grid">
+
+            <div class="hen-card">
+                <div class="hen-top mira">
+                    <span class="hen-icon">🐔</span>
+                    <span class="hen-badge">Lap Hen</span>
+                </div>
+                <div class="hen-body">
+                    <div class="hen-name">Mira</div>
+                    <div class="hen-breed">Chocolate Mottled Orpington</div>
+                    <span class="hen-personality">🤗 The Sweetheart</span>
+                    <p class="hen-desc">Mira is our most affectionate hen — true to the Orpington's well-earned reputation for gentle temperament. Given any opportunity, she'll try to roost right in your lap. Raised from a day-old chick, she's been a people-lover from the very start.</p>
+                    <div class="egg-row">
+                        <div class="egg-pip" style="background:#A0714F;"></div>
+                        <span>Lays large brown eggs, sometimes with speckles</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hen-card">
+                <div class="hen-top dottie">
+                    <span class="hen-icon">🐓</span>
+                    <span class="hen-badge">Top Hen</span>
+                </div>
+                <div class="hen-body">
+                    <div class="hen-name">Dottie</div>
+                    <div class="hen-breed">Speckled Sussex</div>
+                    <span class="hen-personality">👑 The Boss</span>
+                    <p class="hen-desc">Dottie runs a tight ship. As the reigning queen of the pecking order, she's always on a mission — keeping the other hens in line and the flock moving with purpose. Don't let her bossiness fool you; she earned every bit of that rank.</p>
+                    <div class="egg-row">
+                        <div class="egg-pip" style="background:#EDD9A3; border: 1px solid #D4C085;"></div>
+                        <span>Lays light, creamy-tan eggs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hen-card">
+                <div class="hen-top luna">
+                    <span class="hen-icon">🐦</span>
+                    <span class="hen-badge">Free Spirit</span>
+                </div>
+                <div class="hen-body">
+                    <div class="hen-name">Luna</div>
+                    <div class="hen-breed">Light Splash Fibrocana</div>
+                    <span class="hen-personality">🌙 The Adventurer</span>
+                    <p class="hen-desc">Luna is our flighty, boundary-pushing girl. She's always the first to test the edges of the yard and the last to settle — the flock's unofficial sentinel, always scanning, always alert. She came to us from a thoughtful breeding program in Oregon.</p>
+                    <div class="egg-row">
+                        <div class="egg-pip" style="background:#A8CCE0;"></div>
+                        <span>Lays soft, ethereal light blue eggs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hen-card">
+                <div class="hen-top snow">
+                    <span class="hen-icon">🐣</span>
+                    <span class="hen-badge">Broody Girl</span>
+                </div>
+                <div class="hen-body">
+                    <div class="hen-name">Snow</div>
+                    <div class="hen-breed">Light Splash Olive/Moss Egger</div>
+                    <span class="hen-personality">🌿 The Dreamer</span>
+                    <p class="hen-desc">Last in the pecking order but certainly not least — Snow has one singular dream every spring: becoming a mother. She'll devotedly sit on unfertilized eggs for months at a time. One day, Snow. One day. Her deep teal eggs are the crown jewel of every carton.</p>
+                    <div class="egg-row">
+                        <div class="egg-pip" style="background:#5A9EA8;"></div>
+                        <span>Lays rich, jewel-toned deep teal eggs</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="eggs-band" id="eggs">
+    <div class="container">
+        <div class="section-label">The Eggs</div>
+        <h2 class="section-title">Which Egg is Which?</h2>
+        <p class="section-intro">One of the greatest joys of a mixed flock is the rainbow in the egg basket. Here's how to tell the ladies apart.</p>
+
+        <div class="eggs-grid">
+            <div class="egg-card">
+                <div class="egg-shape" style="background:#A0714F;"></div>
+                <div class="egg-label">Mira's Eggs</div>
+                <div class="egg-note">Large and warm brown — the biggest in the basket, sometimes decorated with natural speckles.</div>
+            </div>
+            <div class="egg-card">
+                <div class="egg-shape" style="background:#EDD9A3; border: 1px solid rgba(255,255,255,0.1);"></div>
+                <div class="egg-label">Dottie's Eggs</div>
+                <div class="egg-note">Light, creamy tan — classic and tidy, as orderly and dependable as Dottie herself.</div>
+            </div>
+            <div class="egg-card">
+                <div class="egg-shape" style="background:#A8CCE0;"></div>
+                <div class="egg-label">Luna's Eggs</div>
+                <div class="egg-note">A soft, airy light blue — pale and beautiful, fitting for our most free-spirited hen.</div>
+            </div>
+            <div class="egg-card">
+                <div class="egg-shape" style="background:#5A9EA8;"></div>
+                <div class="egg-label">Snow's Eggs</div>
+                <div class="egg-note">A deep, jewel-toned teal — the most striking egg in the carton, from our most determined girl.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="story-band" id="story">
+    <div class="container">
+        <div class="section-label">The Backstory</div>
+        <h2 class="section-title">How It All Started</h2>
+
+        <div class="story-grid">
+            <div class="story-text">
+                <p class="story-pull">A spring morning, a long line, and a chicken shortage.</p>
+                <p>Mira and Dottie came home in the spring of 2025, just one day old — tiny, peeping fluffballs from <strong>Reber Ranch</strong>, just down the road in our area. Getting them wasn't easy: the avian flu was spreading across the country, chicks were scarce, and we stood in line at store opening to secure our spot.</p>
+                <p>They were raised alongside their brother, Sweet Pea — handled daily, hand-fed, and thoroughly spoiled into the affectionate hens they are today. Mira never forgot those early days of human contact.</p>
+                <p class="story-pull" style="margin-top:1.5rem;">Luna & Snow join the family.</p>
+                <p>Luna and Snow arrived from <strong>Red Dog Ranch in Oregon</strong> at 7–10 months of age, already full-grown and full of character. Part of a thoughtful Americauna-mixed breeding program designed to produce beautiful birds with striking egg colors, they brought their own dynamic to the yard. The flock found its rhythm — and its pecking order — in time.</p>
+            </div>
+
+            <div>
+                <div class="sweet-pea">
+                    <h4>🐓 A note about Sweet Pea</h4>
+                    <p>Every flock has its stories, and ours includes a handsome rooster named Sweet Pea who joined us from Graham, WA. He was charming, beautiful, and completely devoted to his girls — but he was also exceptionally loud. Our neighbors appreciated us considerably more after we found Sweet Pea a proper farm home with plenty of hens to keep him busy. We miss him. A little.</p>
+                </div>
+
+                <div class="ranches">
+                    <div class="ranch-card">
+                        <h5>🏡 Reber Ranch</h5>
+                        <p>Local source of Mira &amp; Dottie. A beloved farm &amp; feed store right here in South King County.</p>
+                    </div>
+                    <div class="ranch-card">
+                        <h5>🌲 Red Dog Ranch</h5>
+                        <p>Oregon-based breeding program — home of Luna &amp; Snow and their beautiful Americauna heritage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-name">🌿 Fresh From the Backyard</div>
+    <p>Four hens. One backyard. Endless eggs.</p>
+    <p style="margin-top:0.8rem; font-size:0.75rem;">Renton, Washington &nbsp;·&nbsp; Shared with love, not for sale</p>
+</footer>
+
+</body>
+</html>
