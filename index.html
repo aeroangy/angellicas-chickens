@@ -129,8 +129,13 @@
         /* Flock Grid */
         .flock-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.75rem;
+        }
+        .hen-top img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .hen-card {
             background: white;
@@ -323,8 +328,114 @@
         }
         @media (max-width: 700px) {
             nav ul { display: none; }
+            .flock-grid { grid-template-columns: 1fr; }
+            .care-grid { grid-template-columns: 1fr; }
             .story-grid { grid-template-columns: 1fr; gap: 2rem; }
             .ranches { grid-template-columns: 1fr; }
+        }
+        /* Egg Care & Education section */
+        .care-band { background: var(--cream-dark); }
+        .care-band .section-title { color: var(--sage-dark); }
+        .care-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        .care-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.6rem 1.5rem;
+            border-top: 4px solid var(--sage);
+        }
+        .care-card.gold  { border-top-color: var(--gold); }
+        .care-card.terra { border-top-color: var(--terracotta); }
+        .care-card.brown { border-top-color: var(--brown); }
+        .care-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+        .care-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+        }
+        .care-text { font-size: 0.9rem; color: var(--text-mid); line-height: 1.78; }
+        .care-text strong { color: var(--sage-dark); font-weight: 600; }
+        .care-aside {
+            margin-top: 0.9rem;
+            padding: 0.6rem 0.9rem;
+            background: var(--cream);
+            border-radius: 8px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.6;
+        }
+        .feed-banner {
+            background: var(--sage-dark);
+            border-radius: 16px;
+            padding: 1.6rem 1.75rem;
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+            margin-top: 1.5rem;
+        }
+        .feed-banner-icon { font-size: 2.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .feed-banner-text h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--cream);
+            margin-bottom: 0.45rem;
+        }
+        .feed-banner-text p { font-size: 0.88rem; color: #9EBA8E; line-height: 1.72; }
+        .feed-banner-text p em { color: #C8D8BE; font-style: italic; }
+
+        /* Photos & Videos section */
+        .media-section { background: var(--cream); }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        .photo-grid img {
+            width: 100%; aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+        .photo-grid img:hover { transform: scale(1.03); }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .video-wrap {
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: var(--sage-dark);
+        }
+        .video-wrap video, .video-wrap iframe {
+            width: 100%; height: 100%;
+            border: none; display: block;
+        }
+        .media-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--sage-dark);
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+        .media-hint {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            background: var(--cream-dark);
+            border-left: 3px solid var(--gold);
+            padding: 0.6rem 1rem;
+            border-radius: 0 8px 8px 0;
         }
     </style>
 </head>
@@ -335,13 +446,15 @@
     <ul>
         <li><a href="#flock">The Flock</a></li>
         <li><a href="#eggs">The Eggs</a></li>
+        <li><a href="#care">Egg Care</a></li>
+        <li><a href="#media">Photos & Videos</a></li>
         <li><a href="#story">Our Story</a></li>
     </ul>
 </nav>
 
 <div class="hero">
     <div class="hero-content">
-        <div class="hero-eyebrow">Renton, Washington</div>
+        <div class="hero-eyebrow">Kent, Washington</div>
         <h1>Fresh Eggs,<br><em>Happy Hens</em></h1>
         <p class="hero-sub">Four remarkable ladies, one backyard flock, and more eggs than we know what to do with.</p>
         <div class="hero-rule"></div>
@@ -358,6 +471,16 @@
 
             <div class="hen-card">
                 <div class="hen-top mira">
+                    <!--
+                    ===================== MIRA'S PHOTO =====================
+                    To add a photo: upload your image file to the same folder
+                    as index.html, then uncomment the line below and replace
+                    "mira.jpg" with your actual filename. The emoji will hide.
+
+                    <img src="mira.jpg" alt="Mira the Chocolate Mottled Orpington">
+
+                    =========================================================
+                    -->
                     <span class="hen-icon">🐔</span>
                     <span class="hen-badge">Lap Hen</span>
                 </div>
@@ -375,6 +498,14 @@
 
             <div class="hen-card">
                 <div class="hen-top dottie">
+                    <!--
+                    ===================== DOTTIE'S PHOTO ====================
+                    Upload dottie.jpg (or any name) to the same folder, then:
+
+                    <img src="dottie.jpg" alt="Dottie the Speckled Sussex">
+
+                    =========================================================
+                    -->
                     <span class="hen-icon">🐓</span>
                     <span class="hen-badge">Top Hen</span>
                 </div>
@@ -392,6 +523,14 @@
 
             <div class="hen-card">
                 <div class="hen-top luna">
+                    <!--
+                    ===================== LUNA'S PHOTO ======================
+                    Upload luna.jpg (or any name) to the same folder, then:
+
+                    <img src="luna.jpg" alt="Luna the Light Splash Fibrocana">
+
+                    =========================================================
+                    -->
                     <span class="hen-icon">🐦</span>
                     <span class="hen-badge">Free Spirit</span>
                 </div>
@@ -409,6 +548,14 @@
 
             <div class="hen-card">
                 <div class="hen-top snow">
+                    <!--
+                    ===================== SNOW'S PHOTO ======================
+                    Upload snow.jpg (or any name) to the same folder, then:
+
+                    <img src="snow.jpg" alt="Snow the Light Splash Olive Egger">
+
+                    =========================================================
+                    -->
                     <span class="hen-icon">🐣</span>
                     <span class="hen-badge">Broody Girl</span>
                 </div>
@@ -459,8 +606,162 @@
     </div>
 </div>
 
-<div class="story-band" id="story">
+</div>
+
+<div class="care-band" id="care">
     <div class="container">
+        <div class="section-label">Good to Know</div>
+        <h2 class="section-title">Egg Care & Where These Eggs Come From</h2>
+        <p class="section-intro">Fresh backyard eggs are a little different from what you find at the store — in the best possible ways. Here's what you should know.</p>
+
+        <div class="care-grid">
+
+            <div class="care-card">
+                <span class="care-icon">🌸</span>
+                <div class="care-title">The Bloom — Nature's Seal</div>
+                <p class="care-text">
+                    When a hen lays an egg, she coats it in a natural protective layer called the <strong>bloom</strong> (or cuticle). This invisible barrier seals the pores of the shell, keeping bacteria out and moisture in — essentially nature's own food preservation system.
+                </p>
+                <p class="care-text" style="margin-top:0.7rem;">
+                    As long as an egg's bloom is intact and the egg is unwashed, it does <strong>not need refrigeration</strong> and can safely sit at room temperature for several weeks. This is standard practice across most of Europe and is how eggs were stored for centuries before refrigeration existed.
+                </p>
+                <div class="care-aside">
+                    💡 Once you wash an egg, the bloom is removed and refrigeration becomes necessary to keep it safe. Wash just before use for best results.
+                </div>
+            </div>
+
+            <div class="care-card gold">
+                <span class="care-icon">🧼</span>
+                <div class="care-title">How to Clean Your Eggs</div>
+                <p class="care-text">
+                    If your egg has a bit of dirt or a feather on it, there's a right way to clean it without stripping the bloom unnecessarily.
+                </p>
+                <p class="care-text" style="margin-top:0.7rem;">
+                    <strong>Dry cleaning first:</strong> For light soiling, a dry cloth or soft brush is all you need. This removes debris without disturbing the bloom at all.
+                </p>
+                <p class="care-text" style="margin-top:0.7rem;">
+                    <strong>If washing is needed:</strong> Use <strong>warm water</strong> (warmer than the egg — never cold, as cold water causes the egg to contract and can draw bacteria inward through the pores). A gentle rinse is all that's required. Avoid soaking, and skip the dish soap unless the egg is heavily soiled.
+                </p>
+                <div class="care-aside">
+                    💡 After washing, dry thoroughly and move to the refrigerator. Washed eggs keep well in the fridge for 4–6 weeks.
+                </div>
+            </div>
+
+            <div class="care-card terra">
+                <span class="care-icon">⏱️</span>
+                <div class="care-title">26 Hours in the Making</div>
+                <p class="care-text">
+                    Every egg is the result of a 24–26 hour journey inside the hen. From the moment a yolk is released, the body builds around it layer by layer — egg white, two shell membranes, and finally the shell itself, which takes up to 20 hours to fully mineralize with calcium. The bloom is applied as a finishing coat just before laying.
+                </p>
+                <p class="care-text" style="margin-top:0.7rem;">
+                    Once laid, the process starts all over again almost immediately. Our girls have no rooster since Sweet Pea moved on before the hens arrived, so every egg is purely the product of the hen's own biology, start to finish.
+                </p>
+                <div class="care-aside">
+                    💡 Shell color is deposited in that final stage — blue and green shells are pigmented like a dye all the way through; brown shells are coated only on the outside. Same egg, different finish.
+                    <br><br>
+                    🐓 Snow tries her best every spring to hatch eggs through sheer determination — but without a rooster, she's sitting on unfertilized eggs. We admire her commitment.
+                </div>
+            </div>
+
+            <div class="care-card brown">
+                <span class="care-icon">❄️</span>
+                <div class="care-title">To Refrigerate or Not?</div>
+                <p class="care-text">
+                    Unwashed eggs with their bloom intact can safely sit on the counter at room temperature for <strong>up to 2–3 weeks</strong>. They need no special treatment and are perfectly safe to eat.
+                </p>
+                <p class="care-text" style="margin-top:0.7rem;">
+                    That said, refrigerating them <strong>extends their freshness significantly</strong> — a refrigerated egg stays at peak quality for up to 3 months. If you don't plan to use them within a week or two, the fridge is the smarter choice.
+                </p>
+                <p class="care-text" style="margin-top:0.7rem;">
+                    One thing to keep in mind: once an egg has been refrigerated, it's best to keep it cold. The temperature fluctuation from fridge to counter and back can cause condensation, which can compromise the bloom and invite bacteria.
+                </p>
+                <div class="care-aside">
+                    💡 Our rule of thumb: counter is fine for a week, fridge if you're not sure when you'll use them.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="feed-banner">
+            <div class="feed-banner-icon">🌾</div>
+            <div class="feed-banner-text">
+                <h4>What Our Hens Eat</h4>
+                <p>
+                    Our girls are fed a fully <strong style="color:var(--cream);">certified organic feed</strong> — no pesticides, no GMOs, no unnecessary additives. We believe what goes into the hen goes into the egg, and we want both to be as wholesome as possible.
+                </p>
+                <p style="margin-top:0.6rem;">
+                    Beyond their feed, the hens spend their days doing what chickens do best: foraging. Our backyard provides a steady supply of <strong style="color:var(--cream);">bugs, beetles, worms, and whatever else they can scratch up</strong> from the soil — natural protein and enrichment that keeps them active, healthy, and entertained. A hen that forages is a happy hen, and happy hens lay better eggs.
+                </p>
+                <p style="margin-top:0.6rem;">
+                    Shell formation demands a lot of calcium, so we supplement with <strong style="color:var(--cream);">crushed oyster shells</strong> available free-choice, and we dry and crush the spent eggshells right back into the feeding rotation — a tidy closed loop that puts the calcium from one egg toward building the next.
+                </p>
+                <p style="margin-top:0.6rem;">
+                    <em>We also feed a small group of outdoor cats — and the chickens have unanimously decided that cat food is a perfectly acceptable second breakfast. We have accepted this.</em>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ================================================================
+     PHOTOS & VIDEOS SECTION
+     To add photos: upload image files to your GitHub Pages repo folder,
+     then follow the instructions in each comment below.
+     To add videos: upload .mp4 files OR paste a YouTube embed URL.
+     ================================================================ -->
+<div class="media-section" id="media">
+    <div class="container">
+        <div class="section-label">The Gallery</div>
+        <h2 class="section-title">Photos &amp; Videos</h2>
+        <p class="section-intro">Life in the backyard, one snapshot at a time.</p>
+
+        <!-- PHOTOS -->
+        <div class="media-sub">Photos</div>
+        <p class="media-hint">
+            To add a photo: upload your image file to your GitHub repo folder alongside index.html,
+            then copy one of the &lt;img&gt; examples below, uncomment it, and update the filename.
+            Add as many as you like — the grid adjusts automatically.
+        </p>
+        <div class="photo-grid">
+            <!--
+            HOW TO ADD PHOTOS — copy any of these lines, remove the dashes, and update the filename:
+
+            <img src="mira-yard.jpg"         alt="Mira in the backyard">
+            <img src="dottie-patrol.jpg"     alt="Dottie on patrol">
+            <img src="luna-fence.jpg"        alt="Luna testing the boundaries">
+            <img src="snow-nesting.jpg"      alt="Snow on her nest">
+            <img src="egg-basket.jpg"        alt="The morning egg haul">
+            <img src="whole-flock.jpg"       alt="All four together">
+            -->
+        </div>
+
+        <!-- VIDEOS -->
+        <div class="media-sub" style="margin-top:2.5rem;">Videos</div>
+        <p class="media-hint">
+            Option A — upload an .mp4 to your repo and use the video tag.
+            Option B — on YouTube click Share &rarr; Embed, copy the src URL, and paste into the iframe.
+        </p>
+        <div class="video-grid">
+            <!--
+            OPTION A — local video file (upload .mp4 to repo):
+            <div class="video-wrap">
+                <video controls>
+                    <source src="chickens-morning.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            OPTION B — YouTube embed (Share > Embed > copy the src URL):
+            <div class="video-wrap">
+                <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                    allowfullscreen title="Backyard flock video"></iframe>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
+
+<div class="story-band" id="story">    <div class="container">
         <div class="section-label">The Backstory</div>
         <h2 class="section-title">How It All Started</h2>
 
@@ -497,7 +798,7 @@
 <footer>
     <div class="footer-name">🌿 Fresh From the Backyard</div>
     <p>Four hens. One backyard. Endless eggs.</p>
-    <p style="margin-top:0.8rem; font-size:0.75rem;">Renton, Washington &nbsp;·&nbsp; Shared with love, not for sale</p>
+    <p style="margin-top:0.8rem; font-size:0.75rem;">Kent, Washington &nbsp;·&nbsp; Shared with love</p>
 </footer>
 
 </body>
